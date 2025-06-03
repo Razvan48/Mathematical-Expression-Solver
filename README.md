@@ -1,2 +1,2 @@
 # Mathematical-Expression-Solver
-A project that involves using Machine Learning Models (such as Convolutional Neural Networks) to identify mathematical symbols and solve given expressions.
+A project which involves using Machine Learning Models (such as Convolutional Neural Networks) to identify mathematical symbols in an image file and solve the given expression.
