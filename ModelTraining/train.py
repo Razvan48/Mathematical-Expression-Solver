@@ -142,6 +142,7 @@ def plot_train_results(train_losses_per_epoch, val_losses_per_epoch, train_accur
       plt.legend()
 
       plt.tight_layout()
+      plt.savefig('train_results.png')
       plt.show()
 
       val_predictions = np.array(val_predictions).reshape(-1)
@@ -155,6 +156,7 @@ def plot_train_results(train_losses_per_epoch, val_losses_per_epoch, train_accur
       plt.ylabel('True Labels')
       plt.title('Confusion Matrix')
 
+      plt.savefig('confusion_matrix.png')
       plt.show()
 
       precision, recall, f1_score, _ = precision_recall_fscore_support(val_labels, val_predictions, average='macro', zero_division=0)
