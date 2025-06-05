@@ -1,11 +1,14 @@
 import cv2 as cv
 import numpy as np
 import queue
+import torch
+
+import ModelTraining.Model as Model
+from expressionEvaluator import evaluate
 
 
 def process_image(image):
     IMAGE_THRESHOLD = 128
-    print(image)
     image = (image > IMAGE_THRESHOLD).astype(np.uint8) * 255
     image = (255 - image).astype(np.uint8)
 
@@ -60,10 +63,40 @@ def find_bounding_boxes(image):
 
 def add_bounding_boxes_to_image(image, bounding_boxes):
     BOUNDING_BOX_GRAY = 128
+    image_copy = image.copy()
     for (x_min, y_min, x_max, y_max) in bounding_boxes:
-        cv.rectangle(image, (x_min, y_min), (x_max, y_max), BOUNDING_BOX_GRAY, 3)
+        cv.rectangle(image_copy, (x_min, y_min), (x_max, y_max), BOUNDING_BOX_GRAY, 3)
 
-    return image
+    return image_copy
+
+
+def analyze_image(image, bounding_boxes):
+    IMAGE_SIZE = (28, 28)
+
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+    model = Model.ConvolutionalNeuralNetwork()
+    model.load_state_dict(torch.load('ModelTraining/model.pth', weights_only=True))
+    model.to(device)
+
+    mathematical_expression = ''
+
+    for (x_min, y_min, x_max, y_max) in bounding_boxes:  # Bounding boxes are sorted from left to right.
+        cropped_image = image[y_min:y_max + 1, x_min:x_max + 1]
+        print('Image Shape:', image.shape, 'Cropped Image Shape:', cropped_image.shape)
+        cropped_image = cv.resize(cropped_image, IMAGE_SIZE)
+
+        model.eval()
+        with torch.no_grad():
+            input_image = torch.tensor(cropped_image, dtype=torch.float32).unsqueeze(0).unsqueeze(0).to(device)
+            output = model(input_image)
+            _, predicted = output.max(1)
+
+            mathematical_expression += Model.from_index_to_symbol[predicted.item()]
+
+    print('Mathematical Expression:', mathematical_expression)
+    result = evaluate(mathematical_expression)
+    return result
 
 
 IMAGE_PATH = 'ExpressionImages/0.png'
@@ -80,9 +113,13 @@ if __name__ == '__main__':
     cv.waitKey(0)
 
     bounding_boxes = find_bounding_boxes(image)
-    image = add_bounding_boxes_to_image(image, bounding_boxes)
-    cv.imshow('Image with Bounding Boxes', image)
+    image_copy = add_bounding_boxes_to_image(image, bounding_boxes)
+    cv.imshow('Image with Bounding Boxes', image_copy)
     cv.waitKey(0)
+
+    print('Mathematical Result:', analyze_image(image, bounding_boxes))
+
+    cv.destroyAllWindows()
 
 
 
