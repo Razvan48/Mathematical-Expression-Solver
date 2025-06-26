@@ -10,6 +10,7 @@ from torch.utils.data import Dataset
 from torch.utils.data import random_split
 from torch.utils.data import ConcatDataset
 from torch.utils.data import Subset
+import torch.nn.functional as F
 
 import Model
 
@@ -50,6 +51,27 @@ class CropBoundingBoxAndResize:
             y_max = image.shape[0] - 1
 
         image = image[y_min:y_max + 1, x_min:x_max + 1]
+
+        total_padding = abs(image.shape[1] - image.shape[0])
+        padding_0 = total_padding // 2
+        padding_1 = total_padding - padding_0
+
+        # print('Image Initial Shape Crop Bounding Box:', image.shape)
+
+        if total_padding > 0:
+            if image.shape[0] < image.shape[1]:
+                image = F.pad(TVF.to_tensor(image), (0, 0, padding_0, padding_1), mode='constant', value=0)
+            else:
+                image = F.pad(TVF.to_tensor(image), (padding_0, padding_1, 0, 0), mode='constant', value=0)
+        else:
+            image = TVF.to_tensor(image)
+
+        # print('Image Final Shape Crop Bounding Box:', image.shape)
+
+        image = image.squeeze(0).numpy().astype(np.uint8) * 255
+        # cv.imshow('Image Crop Bounding Box', image)
+        # cv.waitKey(0)
+
         image = cv.resize(image, self.out_size, interpolation=cv.INTER_NEAREST)
 
         return image
@@ -82,8 +104,8 @@ data_transforms = transforms.Compose([
     CropBoundingBoxAndResize(),
     AddGrayScaleDimension(),
     transforms.GaussianBlur(kernel_size=(3, 3), sigma=(0.1, 2.0)),
-    AddNoise(),
-    AddGrayScaleDimension()
+    # AddNoise(),
+    # AddGrayScaleDimension()
 ])
 
 
@@ -368,6 +390,8 @@ def generate_data():
     test_dataset = create_concat_dataset('GeneratedData', 'test')
     val_dataset = create_concat_dataset('GeneratedData', 'val')
 
+
+generate_data()
 
 
 

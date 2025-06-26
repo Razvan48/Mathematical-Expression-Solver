@@ -6,6 +6,10 @@ import torch
 import ModelTraining.Model as Model
 from expressionEvaluator import evaluate
 
+import torchvision.transforms.functional as TVF
+import torch.nn.functional as F
+
+
 
 def process_image(image):
     IMAGE_THRESHOLD = 128
@@ -83,6 +87,21 @@ def analyze_image(image, bounding_boxes):
 
     for (x_min, y_min, x_max, y_max) in bounding_boxes:  # Bounding boxes are sorted from left to right.
         cropped_image = image[y_min:y_max + 1, x_min:x_max + 1]
+
+        total_padding = abs(cropped_image.shape[1] - cropped_image.shape[0])
+        padding_0 = total_padding // 2
+        padding_1 = total_padding - padding_0
+
+        if total_padding > 0:
+            if cropped_image.shape[0] < cropped_image.shape[1]:
+                cropped_image = F.pad(TVF.to_tensor(cropped_image), (0, 0, padding_0, padding_1), mode='constant', value=0)
+            else:
+                cropped_image = F.pad(TVF.to_tensor(cropped_image), (padding_0, padding_1, 0, 0), mode='constant', value=0)
+        else:
+            cropped_image = TVF.to_tensor(cropped_image)
+
+        cropped_image = cropped_image.squeeze(0).numpy().astype(np.uint8) * 255
+
         print('Image Shape:', image.shape, 'Cropped Image Shape:', cropped_image.shape)
         cropped_image = cv.resize(cropped_image, IMAGE_SIZE)
 
@@ -99,7 +118,7 @@ def analyze_image(image, bounding_boxes):
     return result
 
 
-IMAGE_PATH = 'ExpressionImages/0.png'
+IMAGE_PATH = 'ExpressionImages/1.png'
 
 if __name__ == '__main__':
     image = cv.imread(IMAGE_PATH, cv.IMREAD_GRAYSCALE)
