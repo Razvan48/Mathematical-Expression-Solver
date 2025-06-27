@@ -6,6 +6,6 @@ A project which involves using Machine Learning Models (such as Convolutional Ne
 **Example of usage:** <br/>
 
 <p align = "center">
-  <img width="800" height="533" src="">
+  <img width="800" height="533" src="https://github.com/Razvan48/Mathematical-Expression-Solver/blob/main/Demo/ezgif.com-video-to-gif-converter.gif">
 </p>
 
