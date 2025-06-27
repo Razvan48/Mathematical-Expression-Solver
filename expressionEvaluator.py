@@ -6,7 +6,11 @@ def factor_evaluation(expression, index):
     if expression[index] == '(':
         index += 1
         result, index = expression_evaluation(expression, index)
+        if index >= len(expression) or expression[index] != ')':
+            raise ValueError(f'Error: Closing parenthesis is missing.')
         index += 1
+    elif not expression[index].isdigit():
+        raise ValueError(f'Error: Unexpected character "{expression[index]}" at index {index}. Expected a digit or an opening parenthesis.')
     else:
         passed_the_decimal = False
         num_digits_after_decimal = 0
