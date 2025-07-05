@@ -150,7 +150,8 @@ def plot_train_results(train_losses_per_epoch, val_losses_per_epoch, train_accur
 
       conf_matrix = confusion_matrix(val_labels, val_predictions)
 
-      sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=np.unique(val_labels), yticklabels=np.unique(val_labels))
+      conf_matrix_labels = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '+', '-', '*', '/', '(', ')']  #, ',', '.']
+      sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues', xticklabels=conf_matrix_labels, yticklabels=conf_matrix_labels)
 
       plt.xlabel('Predicted Labels')
       plt.ylabel('True Labels')
