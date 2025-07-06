@@ -13,7 +13,9 @@ A project which involves using Machine Learning Models (such as Convolutional Ne
 <br/>
 <br/>
 
-### [Demo (YouTube)](https://www.youtube.com/watch?v=c3oR5m_b5I0)
+### [Demo 1 (YouTube)](https://www.youtube.com/watch?v=c3oR5m_b5I0)
+
+### [Demo 2 (YouTube)](https://www.youtube.com/watch?v=7529Vf4v9sY)
 
 <br/>
 <br/>
