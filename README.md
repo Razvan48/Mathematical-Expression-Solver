@@ -7,6 +7,11 @@ A project which involves using Machine Learning Models (such as Convolutional Ne
 
 <p align = "center">
   <img width="800" height="533" src="https://github.com/Razvan48/Mathematical-Expression-Solver/blob/main/Demos/ezgif.com-video-to-gif-converter1.gif">
+  
+  <br/>
+  <br/>
+  <br/>
+  
   <img width="800" height="533" src="https://github.com/Razvan48/Mathematical-Expression-Solver/blob/main/Demos/ezgif.com-video-to-gif-converter2.gif">
 </p>
 
