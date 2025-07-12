@@ -11,11 +11,15 @@ import Model
 import dataGeneration
 
 
-model = Model.ConvolutionalNeuralNetwork()
+# model = Model.ConvolutionalNeuralNetwork()
+model = Model.NeuralNetwork()
 
-train_dataset = dataGeneration.create_concat_dataset('GeneratedData', 'train')
-test_dataset = dataGeneration.create_concat_dataset('GeneratedData', 'test')
-val_dataset = dataGeneration.create_concat_dataset('GeneratedData', 'val')
+# train_dataset = dataGeneration.create_concat_dataset('GeneratedData', 'train')
+# test_dataset = dataGeneration.create_concat_dataset('GeneratedData', 'test')
+# val_dataset = dataGeneration.create_concat_dataset('GeneratedData', 'val')
+train_dataset = dataGeneration.create_concat_dataset('GeneratedHOGData', 'train')
+test_dataset = dataGeneration.create_concat_dataset('GeneratedHOGData', 'test')
+val_dataset = dataGeneration.create_concat_dataset('GeneratedHOGData', 'val')
 
 print('Train Dataset Size:', len(train_dataset))
 print('Test Dataset Size:', len(test_dataset))
@@ -142,7 +146,8 @@ def plot_train_results(train_losses_per_epoch, val_losses_per_epoch, train_accur
       plt.legend()
 
       plt.tight_layout()
-      plt.savefig('train_results.png')
+      # plt.savefig('train_results.png')
+      plt.savefig('train_results_2.png')
       plt.show()
 
       val_predictions = np.array(val_predictions).reshape(-1)
@@ -157,7 +162,8 @@ def plot_train_results(train_losses_per_epoch, val_losses_per_epoch, train_accur
       plt.ylabel('True Labels')
       plt.title('Confusion Matrix')
 
-      plt.savefig('confusion_matrix.png')
+      # plt.savefig('confusion_matrix.png')
+      plt.savefig('confusion_matrix_2.png')
       plt.show()
 
       precision, recall, f1_score, _ = precision_recall_fscore_support(val_labels, val_predictions, average='macro', zero_division=0)
@@ -173,7 +179,8 @@ train_losses_per_epoch, val_losses_per_epoch, train_accuracies_per_epoch, val_ac
 precision, recall, f1_score = plot_train_results(train_losses_per_epoch, val_losses_per_epoch, train_accuracies_per_epoch, val_accuracies_per_epoch, val_predictions, val_labels)
 
 
-torch.save(model.state_dict(), 'model.pth')
+# torch.save(model.state_dict(), 'model.pth')
+torch.save(model.state_dict(), 'model_2.pth')
 
 
 
