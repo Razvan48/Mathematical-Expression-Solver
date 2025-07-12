@@ -58,6 +58,6 @@ def generateHOGData():
     generate_histogram_file(val_dataset, 'val', 'val_histogram.pt')
 
 
-generateHOGData()
+# generateHOGData()
 
 
