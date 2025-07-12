@@ -85,3 +85,32 @@ from_index_to_symbol = {
     17: '.'
 }
 
+
+class NeuralNetwork(nn.Module):
+    def __init__(self, input_size=1296, num_classes=16):
+        super(NeuralNetwork, self).__init__()
+
+        self.fc_0 = nn.Linear(in_features=input_size, out_features=512)
+        self.relu_0 = nn.ReLU()
+        self.dropout_0 = nn.Dropout(p=0.4)
+        self.fc_1 = nn.Linear(in_features=512, out_features=256)
+        self.relu_1 = nn.ReLU()
+        self.dropout_1 = nn.Dropout(p=0.4)
+
+        self.fc_2 = nn.Linear(in_features=256, out_features=num_classes)
+
+    def forward(self, X):
+        X = self.fc_0(X)
+        X = self.relu_0(X)
+        X = self.dropout_0(X)
+
+        X = self.fc_1(X)
+        X = self.relu_1(X)
+        X = self.dropout_1(X)
+
+        X = self.fc_2(X)
+
+        return X
+
+
+
