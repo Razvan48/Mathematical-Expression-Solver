@@ -41,15 +41,15 @@ with torch.no_grad():
             predicted_symbol = Model.from_index_to_symbol[predicted[0].item()]
             label_symbol = Model.from_index_to_symbol[y_batch[0].item()]
 
-            if predicted_symbol == '/':
-                predicted_symbol = 'divide'
-            elif predicted_symbol == '*':
+            if predicted_symbol == '*':
                 predicted_symbol = 'times'
+            elif predicted_symbol == '/':
+                predicted_symbol = 'divide'
 
-            if label_symbol == '/':
-                label_symbol = 'divide'
-            elif label_symbol == '*':
+            if label_symbol == '*':
                 label_symbol = 'times'
+            elif label_symbol == '/':
+                label_symbol = 'divide'
 
             image_path = os.path.join(OUTPUT_PATH, f'{label_symbol}/{predicted_symbol}-{batch_idx}.png')
             os.makedirs(os.path.dirname(image_path), exist_ok=True)
