@@ -53,9 +53,9 @@ def generateHOGData():
 
 
 
-    generate_histogram_file(train_dataset, 'train', 'train_histogram.pt')
-    generate_histogram_file(test_dataset, 'test', 'test_histogram.pt')
-    generate_histogram_file(val_dataset, 'val', 'val_histogram.pt')
+    generate_histogram_file(train_dataset, 'train', 'train_hog.pt')
+    generate_histogram_file(test_dataset, 'test', 'test_hog.pt')
+    generate_histogram_file(val_dataset, 'val', 'val_hog.pt')
 
 
 # generateHOGData()
