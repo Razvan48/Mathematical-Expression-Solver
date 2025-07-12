@@ -27,6 +27,7 @@ def generateHOGData():
         for (image, label) in dataset:
 
             image = image.squeeze(0).numpy()
+            image = image.astype('float32') / 255.0  # HOG expects float values in [0.0, 1.0]
             hog_features = hog(
                 image,
                 orientations=9,

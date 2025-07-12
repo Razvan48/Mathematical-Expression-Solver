@@ -241,6 +241,9 @@ if __name__ == '__main__':
 
     model = Model.ConvolutionalNeuralNetwork()
     model.load_state_dict(torch.load('ModelTraining/model.pth', weights_only=True))
+    # model = Model.NeuralNetwork()
+    # model.load_state_dict(torch.load('ModelTraining/model_2.pth', weights_only=True))
+
     model.to(device)
 
     pg.init()
