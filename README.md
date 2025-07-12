@@ -27,9 +27,9 @@ A project which involves using Machine Learning Models (such as Convolutional Ne
 <br/>
 <br/>
 
-## Training Results
+# Training Results
 
-### Convolutional Neural Network
+## Convolutional Neural Network
 
 <p align = "center">
   <h3> Losses and Accuracies (training of 3 epochs) </h3>
@@ -38,7 +38,7 @@ A project which involves using Machine Learning Models (such as Convolutional Ne
   <img width="800" height="533" src="https://github.com/Razvan48/Mathematical-Expression-Solver/blob/main/ModelTraining/confusion_matrix.png">
 </p>
 
-### Neural Network with HOG (Histograms of Oriented Gradients) Descriptors
+## Neural Network with HOG (Histograms of Oriented Gradients) Descriptors
 
 <p align = "center">
   <h3> Losses and Accuracies (training of 3 epochs) </h3>
