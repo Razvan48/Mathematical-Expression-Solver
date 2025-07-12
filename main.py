@@ -11,6 +11,8 @@ from expressionEvaluator import evaluate
 import torchvision.transforms.functional as TVF
 import torch.nn.functional as F
 
+from skimage.feature import hog
+
 
 
 def process_image(image):
@@ -107,6 +109,21 @@ def analyze_image(image, bounding_boxes):
         model.eval()
         with torch.no_grad():
             input_image = torch.tensor(cropped_image, dtype=torch.float32).unsqueeze(0).unsqueeze(0).to(device)
+
+            '''
+            input_image = cropped_image.astype('float32') / 255.0
+            hog_features = hog(
+                input_image,
+                orientations=9,
+                pixels_per_cell=(4, 4),
+                cells_per_block=(2, 2),
+                visualize=False,
+                channel_axis=None
+            )
+            hog_features = torch.tensor(hog_features, dtype=torch.float32)
+            input_image = hog_features.unsqueeze(0).to(device)
+            '''
+
             output = model(input_image)
             _, predicted = output.max(1)
 
