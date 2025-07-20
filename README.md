@@ -32,7 +32,7 @@ A project which involves using Machine Learning Models (such as Convolutional Ne
 ## Convolutional Neural Network
 
 <p align = "center">
-  <h3> Losses and Accuracies (training of 3 epochs) </h3>
+  <h3> Losses and Accuracies (training of 5 epochs) </h3>
   <img width="800" height="533" src="https://github.com/Razvan48/Mathematical-Expression-Solver/blob/main/ModelTraining/train_results.png">
   <h3> Confusion Matrix of Mathematical Symbols </h3>
   <img width="800" height="533" src="https://github.com/Razvan48/Mathematical-Expression-Solver/blob/main/ModelTraining/confusion_matrix.png">
@@ -41,7 +41,7 @@ A project which involves using Machine Learning Models (such as Convolutional Ne
 ## Neural Network with HOG (Histograms of Oriented Gradients) Descriptors
 
 <p align = "center">
-  <h3> Losses and Accuracies (training of 3 epochs) </h3>
+  <h3> Losses and Accuracies (training of 5 epochs) </h3>
   <img width="800" height="533" src="https://github.com/Razvan48/Mathematical-Expression-Solver/blob/main/ModelTraining/train_results_2.png">
   <h3> Confusion Matrix of Mathematical Symbols </h3>
   <img width="800" height="533" src="https://github.com/Razvan48/Mathematical-Expression-Solver/blob/main/ModelTraining/confusion_matrix_2.png">
